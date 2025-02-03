@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Message</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            font-size: xx-large;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="text"></div>
+    <div id="secret" class="hidden">shhh! it's a secret.</div>
+
+    <script>
+        const text = "Hi! This is shuknolonka.";
+        let index = 0;
+        const speed = 100; // Typing speed in milliseconds
+        
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("text").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            } else {
+                setTimeout(() => {
+                    let secretText = "shhh! it's a secret!";
+                    let secretIndex = 0;
+                    document.getElementById("secret").innerHTML = "";
+                    function typeSecret() {
+                        if (secretIndex < secretText.length) {
+                            document.getElementById("secret").innerHTML += secretText.charAt(secretIndex);
+                            secretIndex++;
+                            setTimeout(typeSecret, speed);
+                        }
+                    }
+                    typeSecret();
+                    document.getElementById("secret").classList.remove("hidden");
+                }, 1000);
+            }
+        }
+        
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
